@@ -1,3 +1,5 @@
+{% load bootstrap5 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changa-Today</title>
-
+    
+    {% include 'navbar.html'%}
     {% block styles%}
     {% bootstrap_css%}
 
@@ -17,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% endblock%}
 </head>
 
@@ -39,9 +42,8 @@
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     {% bootstrap_javascript %}
-    <!-- Core theme JS-->
-    <script src="{% static'js/scripts.js'%}"></script>
-    {% endblock%}
+  <script src="{% static 'js/scripts.js' %}"></script>
+  {% endblock%}
 </body>
 
 </html>
