@@ -8,11 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changa-Today</title>
-    
-    {% include 'navbar.html'%}
     {% block styles%}
     {% bootstrap_css%}
-
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -31,6 +28,8 @@
     {% block content%}
 
     {% endblock %}
+
+    {% include 'footer.html'%}
 
     {% block scripts %}
     <!-- Bootstrap core JS-->
