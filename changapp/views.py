@@ -4,7 +4,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from .models import *
+from .forms import FundraiserForm
 # Create your views here.
 
 # @login_required(login_url='/login/')
@@ -46,4 +47,25 @@ def register(request):
         return render (request,'registration/login.html')
     return render(request,'registration/register.html')
 
+# def start_fundraiser(request):
+#     if request.method == 'POST':
+#         form = FundraiserForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             fundraiser = form.save(commit=False)
+#             fundraiser.admin = request.user.profile
+#             fundraiser.save()
+#             return redirect('neighbourhoods')
+#     else:
+#         form = FundraiserForm()
+#     return render(request, 'neighbourhoods/create_neighbourhood.html', {'form':form})
 
+def start_fundraiser(request, username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        form = FundraiserForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = FundraiserForm(instance=request.user.profile)
+    return render(request, 'fundraiser.html', {'form': form})
