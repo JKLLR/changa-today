@@ -44,3 +44,22 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+
+# class Rating(models.Model):
+    
+#     score = models.FloatField(default=0, blank=True)
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='ratings', null=True)
+
+#     def save_rating(self):
+#         self.save()
+
+#     @classmethod
+#     def get_ratings(cls, id):
+#         ratings = Rating.objects.filter(post_id=id).all()
+#         return ratings
+
+#     def __str__(self):
+#         return f'{self.post} Rating'
+
+

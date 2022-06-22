@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +45,14 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'bootstrap5',
+    'cloudinary'
 ]
+
+cloudinary.config( 
+  cloud_name = "dnrny9lzh", 
+  api_key = "899794324973136", 
+  api_secret = "a5aNCEo4affViIODCc7sAsuNHm4" 
+)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
@@ -75,6 +85,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'changaproject.wsgi.application'
 
