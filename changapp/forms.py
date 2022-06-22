@@ -26,4 +26,4 @@ class FundraiserForm(forms.ModelForm):
    Fundraiser_Duration = forms.ChoiceField(choices=DURATIONS,widget=forms.Select())
    class Meta:
       model = Fundraiser
-      fields = ['Cause_name','tel','email','Fundraiser_Type','Fundraiser_Duration','Target_Amount']
+      fields = ['name','tel','email','Fundraiser_Type','Fundraiser_Duration','Target_Amount']
