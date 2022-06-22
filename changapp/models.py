@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from cloudinary.models import CloudinaryField
 
 class Fundraiser(models.Model):
 
@@ -9,9 +10,11 @@ class Fundraiser(models.Model):
    tel = models.IntegerField()
    email = models.EmailField(max_length=254)
    admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='fundraise')
+   photo =CloudinaryField('images')
    Fundraiser_Type = models.CharField(max_length=50)
    Fundraiser_Duration = models.CharField(max_length=50)
    Target_Amount = models.IntegerField()
+   date = models.DateTimeField(auto_now_add=True, blank=True)
     
    def __str__(self):
         return f'{self.name} fundraise'
