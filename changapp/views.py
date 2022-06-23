@@ -11,14 +11,6 @@ from .forms import FundraiserForm
 def home(request):
     return render(request, 'index.html')
 
-def all_fundraisers(request):
-    all_funds = Fundraiser.objects.all()
-    all_funds = all_funds[::-1]
-    params = {
-        'all_funds': all_funds,
-    }
-    return render(request, 'all_fundraisers.html', params)
-
 def signin(request):
     if request.method=="POST":
         username=request.POST["username"]
@@ -77,3 +69,10 @@ def start_fundraiser(request):
         form = FundraiserForm()
     return render(request, 'fundraiser.html', {'form': form})
 
+def all_fundraisers(request):
+    all_funds = Fundraiser.objects.all()
+    all_funds = all_funds[::-1]
+    params = {
+        'all_funds': all_funds,
+    }
+    return render(request, 'all_fundraisers.html', params)
