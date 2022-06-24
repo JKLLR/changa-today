@@ -152,3 +152,8 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STRIPE_PUBLIC_KEY = "pk_test_51LDneaJPOUscS3QFV0PxphlnlR1FmIx2I87Qkdq1Zq98gju93ui6Md2CpcozinQXzZkMmZjEhoLtmq9U9c8As4Fi00EQro4Lp0"
+STRIPE_SECRET_KEY = "sk_test_51LDneaJPOUscS3QFmfBDsLMAz8zh6kZl8J3v2sR7dQFJwlMxS8vS0n8gt9lVFYtGdIGSUuvdpOplWcC4KVzXLuNh00kcJYRntV"
+STRIPE_WEBHOOK_SECRET = ""

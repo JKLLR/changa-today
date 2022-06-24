@@ -1,13 +1,21 @@
+import datetime
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.http import HttpResponse, JsonResponse, Http404
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.views.generic import TemplateView
 from .models import *
-from .forms import FundraiserForm
+from .forms import FundraiserForm, DonationForm
+import stripe
+from django.views import View
+from django.core.exceptions import ObjectDoesNotExist
 
-# @login_required(login_url='/login/')
+
+
+
 def home(request):
     return render(request, 'index.html')
 
@@ -46,6 +54,11 @@ def register(request):
         return render (request,'registration/login.html')
     return render(request,'registration/register.html')
 
+
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)
+
 # def start_fundraiser(request, username):
 #     user = User.objects.get(username=username)
 #     if request.method == 'POST':
@@ -56,7 +69,7 @@ def register(request):
 #     else:
 #         form = FundraiserForm(instance=request.user.profile)
 #     return render(request, 'fundraiser.html', {'form': form})
-
+@login_required(login_url='/login/')
 def start_fundraiser(request):
     if request.method == 'POST':
         form = FundraiserForm(request.POST, request.FILES)
@@ -76,3 +89,51 @@ def all_fundraisers(request):
         'all_funds': all_funds,
     }
     return render(request, 'all_fundraisers.html', params)
+
+
+def success(request):
+    return render(request, 'success.html')
+
+
+def single_fundraise(request, fundraise_id):
+    fundraise = Fundraiser.objects.get(id=fundraise_id)
+    donation = Donate.objects.filter(fundraise=fundraise)
+    donation = donation[::-1]
+    params = {
+        'donation': donation,
+        'fundraise': fundraise
+    }
+    return render(request, 'single_hood.html', params)
+
+
+# def hood_members(request, hood_id):
+#     hood = NeighbourHood.objects.get(id=hood_id)
+#     members = Profile.objects.filter(neighbourhood=hood)
+#     return render(request, 'hoodapp/neibas.html', {'members': members})
+
+
+def donate(request, fundraise_id):
+    fundraise = Fundraiser.objects.get(id=fundraise_id)
+    if request.method == 'POST':
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            donation = form.save(commit=False)
+            donation.fundraise = fundraise
+            donation.save()
+            return redirect('success', fundraise.id)
+    else:
+        form = DonationForm()
+    return render(request, 'donation.html', {'form': form})
+
+
+# def paypal(request):
+#     ctx = {}
+#     return render(request, 'valapp/paypal.html', ctx)
+
+def paypal(request):
+    return render(request, 'paypal.html')
+
+def signout(request):
+    logout(request)
+    messages.success(request,"You have logged out, we will be glad to have you back again")
+    return redirect ("login")

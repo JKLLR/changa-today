@@ -258,6 +258,11 @@ samp {
   unicode-bidi: bidi-override;
 }
 
+.navbar-brand{
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Whisper', cursive;
+}
+
 pre {
   display: block;
   margin-top: 0;

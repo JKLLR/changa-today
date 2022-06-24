@@ -1,3 +1,4 @@
+import email
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -11,6 +12,7 @@ class Fundraiser(models.Model):
    email = models.EmailField(max_length=254)
    admin = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name='fundraise')
    photo =CloudinaryField('images')
+   description = models.TextField(blank=True)
    Fundraiser_Type = models.CharField(max_length=50)
    Fundraiser_Duration = models.CharField(max_length=50)
    Target_Amount = models.IntegerField()
@@ -65,4 +67,33 @@ class Profile(models.Model):
 #     def __str__(self):
 #         return f'{self.post} Rating'
 
+# class Donate(models.Model):
+    
+#     email = models.EmailField(max_length=254)
+#     donation_amount = models.IntegerField()
+#     fundraiser = models.ForeignKey(Fundraiser, on_delete=models.CASCADE,related_name='donations')
+#     date = models.DateTimeField(auto_now_add =True,null=True)
 
+#     def __str__(self):
+#         return self.donation_amount
+
+
+class Donate(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField(max_length=254)
+    donation_amount = models.IntegerField()
+    fundraiser = models.ForeignKey(Fundraiser, on_delete=models.CASCADE,related_name='fundraiser_donation')
+    date = models.DateTimeField(auto_now_add =True,null=True)
+
+    # def __str__(self):
+    #     return f'{self.name} Business'
+
+    # def create_donation(self):
+    #     self.save()
+
+    # def delete_donation(self):
+    #     self.delete()
+
+    # @classmethod
+    # def search_donation(cls, name):
+    #     return cls.objects.filter(name__icontains=name).all()

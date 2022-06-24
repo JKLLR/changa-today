@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}       
+<header class="masthead" style="background-image: url('/static/assets/img/portfolio/donate2.jpg');">
+    <div class="container">
+        <div class="masthead-subheading">About <strong>Changa Today!</strong></div>
+        <div class="masthead-heading text-uppercase">Fundraising: Simple. Fast. Secure.</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'fundraiser' %}">Start a Fundraiser</a>
+    </div>
+</header>
+<div class="container">
+<div class="text-center" style="margin-top: 5vh; margin-bottom: 5vh;">
+    <h2 class="section-heading text-uppercase">About Us</h2>
+    <h3 class="section-subheading text-muted">Why Changa Today you ask?M-Changa is an online & mobile fundraising platform that provides individuals and institutions with a simple, secure and convenient way to raise funds virtually.
+</div>
+{% endblock %} 

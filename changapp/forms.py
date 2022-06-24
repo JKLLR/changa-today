@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Fundraiser
+from .models import Fundraiser, Donate
 
 class FundraiserForm(forms.ModelForm):
    CATEGORIES = (
@@ -26,4 +26,10 @@ class FundraiserForm(forms.ModelForm):
    Fundraiser_Duration = forms.ChoiceField(choices=DURATIONS,widget=forms.Select())
    class Meta:
       model = Fundraiser
-      fields = ['name','tel','email','photo','Fundraiser_Type','Fundraiser_Duration','Target_Amount']
+      fields = ['name','tel','email','photo','description','Fundraiser_Type','Fundraiser_Duration','Target_Amount']
+
+
+class DonationForm(forms.ModelForm):
+    class Meta:
+        model = Donate
+        fields = ['email', 'donation_amount','name']
